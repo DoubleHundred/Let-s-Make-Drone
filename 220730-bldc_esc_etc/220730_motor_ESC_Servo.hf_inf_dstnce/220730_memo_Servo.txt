@@ -1,0 +1,54 @@
+[모터]
+
+Servo.h: PWM를 통해 모터를 제어하기 위한 것
+PWM?: Pulse Width modulation, 디지털 신호를 가지고 아날로그 신호를 흉내내는 것.
+
+motor.attach()
+ - 모터에 할당된 핀 설정
+
+motor.detach()
+ - 모터에 할당된 핀 사용 중지
+
+Serial.available()
+ - Serial 포트에서 읽을 수 있는 byte 수 반환 (Serial 모니터에 입력된 수가 있는지 체크)
+
+motor.write()
+ - 모터를 얼마나 회전 시킬 지 설정
+
+motor.writeMicroseconds()
+ - 어느 정도 속도로 모터를 회전 시킬지 (1초: 1,000,000 MicroSecond)
+
+
+[조이스틱 (방향키)]
+analogRead()
+ - 조이스틱(방향키)의 값을 가져올 때 사용
+
+
+[초음파 센서]
+
+Trig: 초음파를 보내는 영역
+Echo: 초음파를 받는 영역
+4 ~ 5m 까지 거리 측정 가능
+digital pin의 PWM 사용
+
+pinMode()
+ - echo와 trig를 어느 핀에 연결 할 때 사용
+
+pulseIn()
+ - echo의 Pulse (HIGH)가 낮아지는 걸(LOW) 측정 (echo는 켜져 있다가 데이터를 받으면 잠시 꺼진다)
+
+digitalRead()
+ - 초음파 센서의 값 읽기 (digital 중 PWM 사용)
+
+digitalWrite()
+ - trig를 잠깐 켰다가(HIGH) 끌 때 (LOW) 사용
+
+delayMicroseconds()
+ - trig를 얼마나 켰다가 끌 지 시간 설정
+
+long distance = pulseIn(echo, HIGH) / 58.2;
+ - 변수이다. 초음파 센서의 값을 cm로 변환 할 때 사용한다.
+		- 초음파가 1초 동안 가는 거리: 340m (요약: 340m/s)
+		  sec와 m를 microSec와 cm로 변환하기 위해 나누기 10000을 한 것을 2로 나눈다
+			-(왕복 거리를 받음 예: 거리가 1cm일 때 왔다 갔다 해서 2cm))
+		  (distance * 340 / 10000) / 2 = distance / 58.2
